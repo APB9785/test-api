@@ -4,7 +4,6 @@ defmodule PeekHome.PaymentsTest do
   import PeekHomeWeb.Fixtures
 
   alias PeekHome.Payments
-  alias PeekHome.Payments.Payment
 
   describe "payments" do
     setup do

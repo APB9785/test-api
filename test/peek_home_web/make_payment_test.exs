@@ -36,7 +36,7 @@ defmodule PeekHomeWeb.MakePaymentTest do
       assert %{"errors" => _} = json_response(conn, 200)
     end
 
-    test "new balance not less", %{conn: conn} do
+    test "new balance must be less than current", %{conn: conn} do
       order = order_fixture()
       bad_vars = %{"id" => order.id, "bal" => 5000}
       conn = post(conn, "/api", query: @mutation, variables: bad_vars)

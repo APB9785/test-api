@@ -21,7 +21,7 @@ defmodule PeekHomeWeb.ListOrdersTest do
 
   describe "query orders:" do
     test "single order", %{conn: conn} do
-      order = order_fixture()
+      _order = order_fixture()
       conn = post(conn, "/api", %{"query" => @query})
 
       assert %{"data" => %{"orders" => orders}} = json_response(conn, 200)
@@ -29,9 +29,9 @@ defmodule PeekHomeWeb.ListOrdersTest do
     end
 
     test "several orders", %{conn: conn} do
-      order_1 = order_fixture()
-      order_2 = order_fixture()
-      order_3 = order_fixture()
+      _order_1 = order_fixture()
+      _order_2 = order_fixture()
+      _order_3 = order_fixture()
       conn = post(conn, "/api", %{"query" => @query})
 
       assert %{"data" => %{"orders" => orders}} = json_response(conn, 200)
@@ -40,8 +40,8 @@ defmodule PeekHomeWeb.ListOrdersTest do
 
     test "order with payments", %{conn: conn} do
       order = order_fixture()
-      payment_1 = payment_fixture(order)
-      payment_2 = payment_fixture(order)
+      _payment_1 = payment_fixture(order)
+      _payment_2 = payment_fixture(order)
       conn = post(conn, "/api", %{"query" => @query})
 
       assert %{"data" => %{"orders" => [%{"paymentsApplied" => payments}]}} =

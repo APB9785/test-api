@@ -22,18 +22,14 @@ defmodule PeekHome.Orders do
   end
 
   @doc """
+  Gets a single order, or nil if the order does not exist.
+  """
+  def get_order(id), do: Repo.get(Order, id)
+
+  @doc """
   Gets a single order.
 
   Raises `Ecto.NoResultsError` if the Order does not exist.
-
-  ## Examples
-
-      iex> get_order!(123)
-      %Order{}
-
-      iex> get_order!(456)
-      ** (Ecto.NoResultsError)
-
   """
   def get_order!(id), do: Repo.get!(Order, id)
 
@@ -90,5 +86,19 @@ defmodule PeekHome.Orders do
   """
   def search_for_order(%{description: desc, total: total}) do
     Repo.one(from o in Order, where: o.description == ^desc and o.total == ^total)
+  end
+
+  @doc """
+  Given an order, lowers the balance due on that order to a new amount.
+
+  ## Examples
+
+      iex> payment_made(%Order{}, 2500)
+      {:ok, %Order{}}
+  """
+  def payment_made(order, new_balance) do
+    order
+    |> Order.changeset(%{balance_due: new_balance})
+    |> Repo.update()
   end
 end
