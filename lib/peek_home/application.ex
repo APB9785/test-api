@@ -14,7 +14,8 @@ defmodule PeekHome.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: PeekHome.PubSub},
       # Start the Endpoint (http/https)
-      PeekHomeWeb.Endpoint
+      PeekHomeWeb.Endpoint,
+      {Absinthe.Subscription, PeekHomeWeb.Endpoint}
       # Start a worker by calling: PeekHome.Worker.start_link(arg)
       # {PeekHome.Worker, arg}
     ]

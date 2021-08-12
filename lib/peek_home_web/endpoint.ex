@@ -1,4 +1,5 @@
 defmodule PeekHomeWeb.Endpoint do
+  use Absinthe.Phoenix.Endpoint
   use Phoenix.Endpoint, otp_app: :peek_home
 
   # The session will be stored in the cookie and signed,

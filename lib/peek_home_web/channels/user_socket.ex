@@ -1,4 +1,7 @@
 defmodule PeekHomeWeb.UserSocket do
+  use Absinthe.Phoenix.Socket,
+    schema: PeekHomeWeb.Schema
+
   use Phoenix.Socket
 
   ## Channels

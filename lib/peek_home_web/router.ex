@@ -5,7 +5,13 @@ defmodule PeekHomeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", PeekHomeWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: PeekHomeWeb.Schema,
+      socket: PeekHomeWeb.UserSocket
+
+    forward "/", Absinthe.Plug, schema: PeekHomeWeb.Schema
   end
 end
