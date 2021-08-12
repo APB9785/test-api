@@ -41,4 +41,22 @@ defmodule PeekHomeWeb.Schema do
       resolve(&Resolvers.order_and_pay/3)
     end
   end
+
+  subscription do
+    field :activity, :order do
+      config(fn _, _ ->
+        {:ok, topic: "*"}
+      end)
+
+      trigger([:create_order, :make_payment, :order_and_pay],
+        topic: fn _ ->
+          "*"
+        end
+      )
+
+      resolve(fn order, _, _ ->
+        {:ok, order}
+      end)
+    end
+  end
 end

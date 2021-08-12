@@ -33,7 +33,7 @@ defmodule PeekHomeWeb.MakePaymentTest do
       bad_vars = %{"id" => Ecto.UUID.generate(), "bal" => 50}
       conn = post(conn, "/api", query: @mutation, variables: bad_vars)
 
-      assert %{"errors" => _} = json_response(conn, 200)
+      assert %{"errors" => [%{"message" => "Order not found"}]} = json_response(conn, 200)
     end
 
     test "new balance must be less than current", %{conn: conn} do
@@ -41,7 +41,8 @@ defmodule PeekHomeWeb.MakePaymentTest do
       bad_vars = %{"id" => order.id, "bal" => 5000}
       conn = post(conn, "/api", query: @mutation, variables: bad_vars)
 
-      assert %{"errors" => _} = json_response(conn, 200)
+      assert %{"errors" => [%{"message" => "New balance must be less than 100"}]} =
+               json_response(conn, 200)
     end
 
     test "idempotence", %{conn: conn} do
