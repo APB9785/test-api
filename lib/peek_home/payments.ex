@@ -38,21 +38,18 @@ defmodule PeekHome.Payments do
   def get_payment!(id), do: Repo.get!(Payment, id)
 
   @doc """
-  Creates a payment.
+  Creates a payment and raises an error if it fails.
 
   ## Examples
 
       iex> create_payment(%{field: value})
-      {:ok, %Payment{}}
-
-      iex> create_payment(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+      %Payment{}
 
   """
-  def create_payment(attrs \\ %{}) do
+  def create_payment!(attrs \\ %{}) do
     %Payment{}
     |> Payment.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert!()
   end
 
   @doc """
